@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Membership - Acxiom{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0">Update Membership</h4>
+            </div>
+            <div class="card-body">
+                {% if message %}
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+
+                <form method="get" class="mb-4">
+                    <label for="membership_number" class="form-label">Search Membership Number</label>
+                    <div class="input-group">
+                        <input type="text" name="membership_number" id="membership_number" class="form-control"
+                            placeholder="Enter Membership ID" required>
+                        <button type="submit" name="search" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+
+                {% if membership %}
+                <hr>
+                <h5 class="mb-3">Member Details</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="membership_number_hidden" value="{{ membership.membership_number }}">
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p><strong>Name:</strong> {{ membership.first_name }} {{ membership.last_name }}</p>
+                            <p><strong>Contact:</strong> {{ membership.contact_number }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Address:</strong> {{ membership.address }}</p>
+                            <p><strong>Status:</strong>
+                                {% if membership.status == 'Active' %}
+                                <span class="badge bg-success">Active</span>
+                                {% else %}
+                                <span class="badge bg-danger">Cancelled</span>
+                                {% endif %}
+                            </p>
+                            <p><strong>End Date:</strong> {{ membership.end_date }}</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" name="extend" class="btn btn-success flex-grow-1">Extend Membership (6
+                            Months)</button>
+                        <button type="submit" name="cancel" class="btn btn-danger flex-grow-1">Cancel
+                            Membership</button>
+                    </div>
+                </form>
+                {% endif %}
+
+                <div class="mt-4">
+                    <a href="{% url 'maintenance' %}" class="btn btn-secondary">Back to Maintenance</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+
+{% block title %}Home - Acxiom{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Welcome to Acxiom Library</h1>
+        <p class="col-md-8 fs-4">Manage your library efficiently with our comprehensive system.</p>
+        {% if user.is_superuser or user|has_group:"Admin" %}
+        <a class="btn btn-primary btn-lg" href="{% url 'maintenance' %}" role="button">Go to Maintenance</a>
+        {% else %}
+        <a class="btn btn-primary btn-lg" href="{% url 'transactions' %}" role="button">Go to Transactions</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row align-items-md-stretch">
+    <div class="col-md-6 mb-4">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+            <h2>Transactions</h2>
+            <p>Issue and return books seamlessly. Keep track of all library movements.</p>
+            <a href="{% url 'transactions' %}" class="btn btn-outline-light" type="button">Manage Transactions</a>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <h2>Reports</h2>
+            <p>View detailed reports of all memberships and their statuses.</p>
+            <a href="{% url 'reports' %}" class="btn btn-outline-secondary" type="button">View Reports</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

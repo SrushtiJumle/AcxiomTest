@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Maintenance - Acxiom{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Maintenance Module</h2>
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-user-plus fa-3x mb-3 text-primary"></i>
+                <h5 class="card-title">Add Membership</h5>
+                <p class="card-text">Register new members to the library.</p>
+                <a href="{% url 'add_membership' %}" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-user-edit fa-3x mb-3 text-warning"></i>
+                <h5 class="card-title">Update Membership</h5>
+                <p class="card-text">Modify existing membership details.</p>
+                <a href="{% url 'update_membership' %}" class="btn btn-warning">Go</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-book-medical fa-3x mb-3 text-success"></i>
+                <h5 class="card-title">Add Book</h5>
+                <p class="card-text">Add new books to the inventory.</p>
+                <a href="{% url 'add_book' %}" class="btn btn-success">Go</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt-4">
+    <a href="{% url 'reports' %}" class="btn btn-secondary">Next Module (Reports)</a>
+</div>
+{% endblock %}
